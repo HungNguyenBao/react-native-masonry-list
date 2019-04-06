@@ -413,9 +413,25 @@ export default class MasonryList extends React.PureComponent {
       this.props.masonryFlatListColProps.onEndReached();
   };
 
-  render() {
+  _isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }) => {
+    const paddingToBottom = 50;
     return (
-      <ScrollView>
+      layoutMeasurement.height + contentOffset.y >=
+      contentSize.height - paddingToBottom
+    );
+  };
+
+  render() {
+    const {onEndReach, ...rest} = this.props.masonryFlatListColProps;
+    return (
+      <ScrollView
+        onScroll={({ nativeEvent }) => {
+          if (this._isCloseToBottom(nativeEvent)) {
+            this._onCallEndReach();
+          }
+        }}
+        scrollEventThrottle={16}
+      >
         {this.props.renderHeader()}
         <FlatList
           style={{
@@ -432,8 +448,7 @@ export default class MasonryList extends React.PureComponent {
           }}
           removeClippedSubviews={true}
           onEndReachedThreshold={this.props.onEndReachedThreshold}
-          {...this.props.masonryFlatListColProps}
-          onEndReached={this._onCallEndReach}
+          {...rest}
           initialNumToRender={
             this.props.initialColToRender
               ? this.props.initialColToRender
