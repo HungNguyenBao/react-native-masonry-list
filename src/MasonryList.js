@@ -422,7 +422,8 @@ export default class MasonryList extends React.PureComponent {
   };
 
   render() {
-    const {onEndReach, ...rest} = this.props.masonryFlatListColProps;
+    const {onEndReached, ...rest} = this.props.masonryFlatListColProps;
+
     return (
       <ScrollView
         onScroll={({ nativeEvent }) => {
@@ -448,7 +449,6 @@ export default class MasonryList extends React.PureComponent {
           }}
           removeClippedSubviews={true}
           onEndReachedThreshold={this.props.onEndReachedThreshold}
-          {...rest}
           initialNumToRender={
             this.props.initialColToRender
               ? this.props.initialColToRender
@@ -479,6 +479,7 @@ export default class MasonryList extends React.PureComponent {
               />
             );
           }}
+          {...rest}
         />
         {this.props.renderFooter()}
       </ScrollView>
