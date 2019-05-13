@@ -25,7 +25,7 @@ export default class ImageComponent extends React.PureComponent {
 			source,
 			imageContainerStyle,
 			customImageComponent,
-			customImageProps
+			customImageProps,
 			data
 		} = this.props;
 		const imageProps = {
