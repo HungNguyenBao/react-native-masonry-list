@@ -26,6 +26,7 @@ export default class ImageComponent extends React.PureComponent {
 			imageContainerStyle,
 			customImageComponent,
 			customImageProps
+			data
 		} = this.props;
 		const imageProps = {
 			source: source,
@@ -41,6 +42,7 @@ export default class ImageComponent extends React.PureComponent {
 
 		return (
 			<Injector
+				data={data}
 				defaultComponent={Image}
 				defaultProps={imageProps}
 				injectant={customImageComponent}
